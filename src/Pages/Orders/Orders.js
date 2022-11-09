@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider'
 import OrderRow from './OrderRow';
-
 const Orders = () => {
     const { user, logOut } = useContext(AuthContext);
     const [orders, setOrders] = useState([])
@@ -9,7 +8,7 @@ const Orders = () => {
     useEffect(() => {
         fetch(`http://localhost:5000/orders?email=${user?.email}`, {
             headers: {
-                // authorization: `Bearer ${localStorage.getItem('genius-token')}`
+                authorization: `Bearer ${localStorage.getItem('genius-token')}`
             }
         })
             .then(res => {
@@ -29,7 +28,7 @@ const Orders = () => {
             fetch(`http://localhost:5000/orders/${id}`, {
                 method: 'DELETE',
                 headers: {
-                    // authorization: `Bearer ${localStorage.getItem('genius-token')}`
+                    authorization: `Bearer ${localStorage.getItem('genius-token')}`
                 }
             })
                 .then(res => res.json())
@@ -48,7 +47,7 @@ const Orders = () => {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
-                // authorization: `Bearer ${localStorage.getItem('genius-token')}`
+                authorization: `Bearer ${localStorage.getItem('genius-token')}`
             },
             body: JSON.stringify({ status: 'Approved' })
         })
